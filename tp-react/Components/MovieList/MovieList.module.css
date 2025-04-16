@@ -1,0 +1,64 @@
+/* MovieList.module.css */
+
+/* Fondo gris para la sección */
+.section {
+    background-color: gray; /* Fondo gris */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 15px;
+  }
+  
+  /* Títulos de la sección */
+  .sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .leftTitle {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .rightTitle {
+    font-size: 14px;
+    color: white;
+  }
+  
+  /* Contenedor de las tarjetas */
+  .cardContainer {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Para que las tarjetas se acomoden cuando no haya espacio suficiente */
+  }
+  
+  /* Estilos para cada tarjeta */
+  .card {
+    width: 240px;
+    height: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  
+  /* Imagen de la película */
+  .moviePoster {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  /* Título de la película */
+  .movieTitle {
+    margin-top: 1px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  }
+  
