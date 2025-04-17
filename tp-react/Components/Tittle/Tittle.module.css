@@ -1,6 +1,10 @@
-.tittle {
-    border: 1px solid white; /* borde blanco para acomodar */
-    padding: 8px 20px;
-    font-weight: bold;
-    font-size: 22px;
-  }
+
+
+.titulo {
+  font-size: 1.5rem;
+  flex: 1; /* Ocupará el espacio disponible sin empujar el botón fuera */
+  min-width: 0; /* Evita desbordes si el título es muy largo */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

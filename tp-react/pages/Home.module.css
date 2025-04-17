@@ -4,9 +4,10 @@
   align-items: center;
   background-color: darkgray;
   padding: 10px 20px;
-  margin-bottom: 20px; 
+  flex-wrap: wrap; /* Permite que los elementos bajen si no entran */
+  width: 100%;
+  box-sizing: border-box;
 }
- 
 
   .footer {
     display: flex;
