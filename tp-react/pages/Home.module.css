@@ -1,23 +1,60 @@
+/* Contenedor principal */
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  background-color: #1e1e1e;
+  color: white;
+}
+
+/* Header (parte superior) */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: darkgray;
-  padding: 10px 20px;
-  flex-wrap: wrap; /* Permite que los elementos bajen si no entran */
-  width: 100%;
-  box-sizing: border-box;
+  padding: 20px;
+  background-color: #121212;
+  border-bottom: 1px solid #333;
 }
 
-  .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: darkgray;
-    padding: 10px 20px;
-  }
-  
+/* Contenido principal entre header y footer */
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1300px;
+}
 
 
-  
-  
+/* Parte izquierda: Carruseles */
+.mainContent {
+  flex: 2;
+  min-width: 0;
+}
+
+
+.filterPanel {
+  background-color: #131313;
+  border-radius: 8px;
+  border: 1px solid #444;
+  color: wheat;
+  min-width: 150px;
+  max-height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  top: 100px;          /* Se queda pegado a 20px del top del contenedor padre */
+}
+
+
+
+/* Footer (parte inferior) */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #121212;
+  color: #aaa;
+  border-top: 1px solid #333;
+}
+

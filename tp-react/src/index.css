@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: white;
+  color: (255, 255, 255, 0.87);
+  background-color: #403C39;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,10 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+
+html, body, #root {
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
-  overflow-x: hidden; /* evita scroll horizontal */
-  font-family: sans-serif;
 }
