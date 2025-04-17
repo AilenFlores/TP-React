@@ -4,104 +4,24 @@ import InputSearch from '../Components/InputSearch/InputSearch';
 import Button from '../Components/Button/Button'; 
 import MovieList from '../Components/MovieList/MovieList';
 
-const defaultMovies = [
-  {
-    titulo: 'The Last of Us',
-    director: 'Craig Mazin, Neil Druckmann',
-    año: 2023,
-    genero: 'Drama, Aventura, Terror',
-    rating: 9.2,
-    tipo: 'Serie',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/tNQWO6cNzQYCyvw36mUcAQQyf5F.jpg',
-  },
-  {
-    titulo: 'Spider-Man: No Way Home',
-    director: 'Jon Watts',
-    año: 2021,
-    genero: 'Acción, Aventura, Ciencia ficción',
-    rating: 8.7,
-    tipo: 'Película',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/miZFgV81xG324rpUknQX8dtXuBl.jpg',
-  },
-  {
-    titulo: 'Stranger Things',
-    director: 'The Duffer Brothers',
-    año: 2016,
-    genero: 'Drama, Terror, Ciencia ficción',
-    rating: 8.8,
-    tipo: 'Serie',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg',
-  },
-  {
-    titulo: 'Breaking Bad',
-    director: 'Vince Gilligan',
-    año: 2008,
-    genero: 'Crimen, Drama, Suspenso',
-    rating: 9.5,
-    tipo: 'Serie',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/ineLOBPG8AZsluYwnkMpHRyu7L.jpg',
-  },
-  {
-    titulo: 'Avatar: The Way of Water',
-    director: 'James Cameron',
-    año: 2022,
-    genero: 'Acción, Aventura, Ciencia ficción',
-    rating: 7.8,
-    tipo: 'Película',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/tXmTHdrZgNsULqCbThK2Dt2X9Wt.jpg',
-  },
-  {
-    titulo: 'The Witcher',
-    director: 'Lauren Schmidt Hissrich',
-    año: 2019,
-    genero: 'Aventura, Drama, Fantasía',
-    rating: 8.1,
-    tipo: 'Serie',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/gvn0m0LCIslrURjSo7UG5Rx6mV2.jpg',
-  },
-  {
-    titulo: 'Guardians of the Galaxy Vol. 3',
-    director: 'James Gunn',
-    año: 2023,
-    genero: 'Acción, Aventura, Ciencia ficción',
-    rating: 8.0,
-    tipo: 'Película',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/6GkKzdNosVAL7UGgwTtCHSxLQ67.jpg',
-  },
-  {
-    titulo: 'The Mandalorian',
-    director: 'Jon Favreau',
-    año: 2019,
-    genero: 'Acción, Aventura, Ciencia ficción',
-    rating: 8.7,
-    tipo: 'Serie',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/iLg3DzrwCDsHNovNaWx5JnQAsiV.jpg',
-  },
-  {
-    titulo: 'Dune',
-    director: 'Denis Villeneuve',
-    año: 2021,
-    genero: 'Ciencia ficción, Drama, Aventura',
-    rating: 8.1,
-    tipo: 'Película',
-    visto: true,
-    img: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/szcew6yyjcDvaL0isaPBk2e3nkF.jpg',
-  }
-];
-
-
-
-    
+import defaultMovies from '../data/defaultMovies'; // Importar el archivo con las películas
+// Solo si no hay nada guardado aún en localStorage se inicializa con defaultMovies
+if (!localStorage.getItem('peliculas')) {
+  localStorage.setItem('peliculas', JSON.stringify(defaultMovies));
+}
 
 const Home = () => {
+  // Estado para almacenar las películas
+  const [movies, setMovies] = useState(() => {
+    // Obtener las películas del localStorage al cargar el componente
+    const stored = localStorage.getItem('peliculas');
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  useEffect(() => { 
+    localStorage.setItem('peliculas', JSON.stringify(movies)); // Guardar las películas en localStorage cada vez que cambian
+  }, [movies]);
+
 
   const WatchedMovie = defaultMovies.filter((movie) => movie.visto === true);
   const UnwatchedMovie = defaultMovies.filter((movie) => movie.visto === false);
