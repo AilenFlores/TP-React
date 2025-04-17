@@ -1,27 +1,27 @@
-import Style from './MovieList.module.css'; // Asegúrate de que este archivo exista y tenga los estilos
+import React from 'react';
+import Counter from '../Counter/Counter';
+import MovieCarousel from '../MovieCarrusel/MovieCarrusel';
+import Style from './MovieList.module.css';
 
 const MovieList = ({ text, movies, onMovieClick }) => {
   return (
     <div className={Style.movieList}>
       <div className={Style.section}>
         <div className={Style.sectionHeader}>
-          <span className={Style.leftTitle}>
-            {text}
-          </span>
+          <span className={Style.leftTitle}>{text}</span>
           <span className={Style.rightTitle}>
-          Cantidad {movies.length} películas/series.
+            <Counter count={movies.length} />
           </span>
         </div>
-
-        <div className={Style.cardContainer}>
-          {movies.map((movie) => (
-            <div className={Style.card} onClick={() => onMovieClick(movie)} > 
-              <img src={movie.img} alt={movie.title} className={Style.moviePoster} />
-              <h2 className={Style.movieTitle}>{movie.titulo}</h2>
-              <h2 className={Style.movieTitle}>{"Categoria: " } {movie.tipo}</h2>
-            </div>
-          ))}
-        </div>
+        
+        {/* Condicional: Si hay películas, mostrar el carrusel, si no, mostrar el mensaje */}
+        {movies.length > 0 ? (
+          <MovieCarousel movies={movies} onMovieClick={onMovieClick} />
+        ) : (
+          <div className={Style.noMoviesMessage}>
+            <span>No hay películas disponibles por el momento.</span>
+          </div>
+        )}
       </div>
     </div>
   );

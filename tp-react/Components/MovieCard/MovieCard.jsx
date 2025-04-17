@@ -1,0 +1,16 @@
+import React from 'react';
+import Style from './MovieCard.module.css';
+
+const MovieItem = ({ movie, onMovieClick }) => {
+  return (
+    <div className={Style.card} onClick={() => onMovieClick(movie)}>
+      <img src={movie.img} alt={movie.titulo} className={Style.moviePoster} />
+      <div className={Style.movieOverlay}>
+        <h2 className={Style.movieTitle}>{movie.titulo}</h2>
+        <h3 className={Style.movieTitle}>Categoría: {movie.tipo}</h3>
+      </div>
+    </div>
+  );
+};
+
+export default MovieItem;

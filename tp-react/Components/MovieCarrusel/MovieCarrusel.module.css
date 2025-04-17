@@ -1,0 +1,46 @@
+.carouselWrapper { /* Carrusel */
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .cardContainer {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    flex-grow: 1;
+    scrollbar-width: none;
+  }
+  
+  .cardContainer::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: black;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+    border-radius: 50%;
+  }
+  
+  .arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+  .right {
+    right: 0;
+  }
+  

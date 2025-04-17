@@ -2,11 +2,12 @@
 
 /* Fondo gris para la sección */
 .section {
-    background-color: gray; /* Fondo gris */
+    background-color: gray;
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #ddd;
     margin: 15px;
+    position: relative; 
   }
   
   /* Títulos de la sección */
@@ -25,40 +26,23 @@
     font-size: 14px;
     color: white;
   }
-  
-  /* Contenedor de las tarjetas */
-  .cardContainer {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap; /* Para que las tarjetas se acomoden cuando no haya espacio suficiente */
-  }
-  
-  /* Estilos para cada tarjeta */
-  .card {
-    width: 240px;
-    height: 300px;
+
+  .noMoviesMessage { /* Mensaje de "No hay películas" */
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-  }
-  
-  
-  /* Imagen de la película */
-  .moviePoster {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
-  /* Título de la película */
-  .movieTitle {
-    margin-top: 1px;
-    font-size: 15px;
-    font-weight: bold;
     color: black;
+    position: relative;
+    width: 220px;
+    height: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+  }
+  
+  .noMoviesMessage span { /* Estilo del mensaje */
+    font-size: 1.2rem;
+    color: #555; /* O el color que prefieras */
   }
   
