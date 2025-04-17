@@ -3,6 +3,8 @@ import Style from './Home.module.css';
 import InputSearch from '../Components/InputSearch/InputSearch'; 
 import Button from '../Components/Button/Button'; 
 import MovieList from '../Components/MovieList/MovieList';
+import DetalleMovie from '../Components/DetalleMovie/DetalleMovie.jsx';
+
 
 const defaultMovies = [
   {
@@ -102,16 +104,36 @@ const defaultMovies = [
     
 
 const Home = () => {
+  const [movies, setMovies] = useState(defaultMovies);
+  const [movieSeleccionada, setMovieSeleccionada] = useState(null);
+  const [mostrarDetalle, setMostrarDetalle] = useState(false);
 
-  const WatchedMovie = defaultMovies.filter((movie) => movie.visto === true);
-  const UnwatchedMovie = defaultMovies.filter((movie) => movie.visto === false);
+  const agregarMovie = (nuevaMovie) => {
+    setMovies([...movies, nuevaMovie]);
+  };
+
+  const verDetalleMovie = (movie) => {
+    setMovieSeleccionada(movie);
+    setMostrarDetalle(true);
+  }
+
+  const WatchedMovie = movies.filter((movie) => movie.visto === true);
+const UnwatchedMovie = movies.filter((movie) => movie.visto === false);
 
   return (
     <div className={Style.homeContainer}>
       <div className={Style.header}>
         <div className={Style.logo}>NERDFLIX</div>
         <InputSearch />
-        <Button></Button>
+        <Button onGuardar={agregarMovie}></Button>
+
+        
+        <DetalleMovie
+        movies={movieSeleccionada}
+        visible={mostrarDetalle}
+        onClose={() => setMostrarDetalle(false)} 
+      />
+
       </div>
       <MovieList text="Películas y Series que te podrían interesar..." movies={UnwatchedMovie} onMovieClick={(movie) => console.log(movie)} />
       <MovieList text="Peliculas y Series que has visto..." movies={WatchedMovie} onMovieClick={(movie) => console.log(movie)} />
