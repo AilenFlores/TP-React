@@ -10,7 +10,7 @@ const MovieList = ({ text, movies, onMovieClick }) => {
         <div className={Style.sectionHeader}>
           <span className={Style.leftTitle}>{text}</span>
           <span className={Style.rightTitle}>
-            <Counter count={movies.length} />
+            <Counter count={movies.length} label="Esta lista contiene"/>
           </span>
         </div>
         

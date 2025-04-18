@@ -16,6 +16,7 @@ const MovieItem = ({ movie, onMovieClick }) => {
       <div className={Style.movieOverlay}>
         <h2 className={Style.movieTitle}>{movie.titulo}</h2>
         <h3 className={Style.movieTitle}>Categoría: {movie.tipo}</h3>
+        <h3 className={Style.movieTitle}>Director: {movie.director}</h3>
       </div>
     </div>
   );
