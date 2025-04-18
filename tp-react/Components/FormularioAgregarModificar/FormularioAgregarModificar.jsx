@@ -10,7 +10,6 @@ function FormularioModal({ visible, onClose, onGuardar }) {
   const [tipo, setTipo] = useState('');
   const [visto, setVisto] = useState(false); // <-- Estado para switch
   const [imagen, setImagen] = useState(null);
-  
 
   const handleGuardar = () => {
     if (!titulo || !director || !anio || !genero || !rating || !tipo || !imagen) {
@@ -30,7 +29,6 @@ function FormularioModal({ visible, onClose, onGuardar }) {
     setTipo('');
     setVisto(false);
     setImagen(null);
-    
   };
 
   const handleImagenChange = (e) => {
@@ -42,6 +40,10 @@ function FormularioModal({ visible, onClose, onGuardar }) {
       };
       reader.readAsDataURL(archivo);
     }
+  };
+
+  const handleEliminarImagen = () => {
+    setImagen(null);
   };
 
   if (!visible) return null;
@@ -56,7 +58,6 @@ function FormularioModal({ visible, onClose, onGuardar }) {
         <input placeholder="Genero" value={genero} onChange={(e) => setGenero(e.target.value)} />
         <input placeholder="Rating" value={rating} onChange={(e) => setRating(e.target.value)} />
         <input placeholder="Tipo" value={tipo} onChange={(e) => setTipo(e.target.value)} />
-    
 
         {/* Switch Visto / No visto */}
         <div className="switch-container">
@@ -66,8 +67,30 @@ function FormularioModal({ visible, onClose, onGuardar }) {
           </label>
           <span className="estado">{visto ? 'Visto' : 'No visto'}</span>
         </div>
-        
-        <input type="file" accept="image/*" onChange={handleImagenChange} />
+
+        {/* Mostrar el input para subir imagen solo si no hay imagen cargada */}
+        {!imagen && (
+          <>
+            <label htmlFor="fileInput" className="file-upload-area">
+              <span className="upload-icon">📷</span>
+              <span>Haz clic para subir una imagen</span>
+            </label>
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/*"
+              onChange={handleImagenChange}
+            />
+          </>
+        )}
+
+        {/* Mostrar imagen subida como miniatura y botón de eliminar con "X" */}
+        {imagen && (
+          <div className="imagen-preview">
+            <img src={imagen} alt="Imagen subida" className="preview-img" />
+            <button onClick={handleEliminarImagen} className="eliminar-imagen">X</button>
+          </div>
+        )}
 
         <button className="guardar" onClick={handleGuardar}>Guardar</button>
         <button className="cancelar" onClick={onClose}>Cancelar</button>
