@@ -1,12 +1,45 @@
-.addButton {
+/* Botón general */
+.button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Botón Agregar (puede usarse también como primario) */
+.addButton,
+.modificar {
   background-color: #007bff;
   color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  white-space: nowrap; /* evita que se corte en dos líneas */
+}
+
+.addButton:hover,
+.modificar:hover {
+  background-color: #005fcc;
+  transform: scale(1.02);
+}
+
+/* Botón Eliminar */
+.eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.eliminar:hover {
+  background-color: #c82333;
+  transform: scale(1.02);
+}
+
+/* Botón Cerrar */
+.cancelar {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.cancelar:hover {
+  background-color: #454444;
+  transform: scale(1.02);
 }

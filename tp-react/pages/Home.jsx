@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Style from './Home.module.css';
-import InputSearch from '../Components/InputSearch/InputSearch'; 
-import Button from '../Components/Button/Button'; 
+import InputSearch from '../Components/InputSearch/InputSearch';
+import Button from '../Components/Button/Button'; // Importamos el componente Button
 import Tittle from '../Components/Tittle/Tittle';
 import MovieList from '../Components/MovieList/MovieList';
-import DetalleMovie from '../Components/DetalleMovie/DetalleMovie.jsx';
-
+import DetalleMovie from '../Components/DetalleMovie/DetalleMovie';
 import FilterGenre from '../Components/FilterGenre/FilterGenre';
+import FormularioModal from '../Components/FormularioAgregarModificar/FormularioAgregarModificar';
 
 import defaultMovies from '../data/DefaultMovies';
 
@@ -20,19 +20,46 @@ const Home = () => {
     const stored = localStorage.getItem('peliculas');
     return stored ? JSON.parse(stored) : [];
   });
+
   const [movieSeleccionada, setMovieSeleccionada] = useState(null);
   const [mostrarDetalle, setMostrarDetalle] = useState(false);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
   const agregarMovie = (nuevaMovie) => {
-    setMovies([...movies, nuevaMovie]);
+    const nuevoId = movies.length > 0
+      ? Math.max(...movies.map((m) => m.id || 0)) + 1
+      : 1;
+
+    const movieConId = { ...nuevaMovie, id: nuevoId };
+    setMovies([...movies, movieConId]);
+  };
+
+  const editarMovie = (peliculaEditada) => {
+    const updatedMovies = movies.map((movie) =>
+      movie.id === peliculaEditada.id ? peliculaEditada : movie
+    );
+    setMovies(updatedMovies);
   };
 
   const verDetalleMovie = (movie) => {
     setMovieSeleccionada(movie);
     setMostrarDetalle(true);
-  }
+  };
 
+  const abrirFormularioAgregar = () => {
+    setMovieSeleccionada(null); // modo agregar
+    setMostrarFormulario(true);
+  };
 
+  const abrirFormularioEdicion = (movie) => {
+    setMovieSeleccionada(movie);
+    setMostrarDetalle(false);
+    setMostrarFormulario(true);
+  };
+
+  const cerrarFormulario = () => {
+    setMostrarFormulario(false);
+  };
 
   useEffect(() => {
     localStorage.setItem('peliculas', JSON.stringify(movies));
@@ -47,15 +74,27 @@ const Home = () => {
       <div className={Style.header}>
         <Tittle name="Nerdflix" />
         <InputSearch />
+        <Button onClick={abrirFormularioAgregar} className="modificar">
+          Agregar Película/Serie
+        </Button>
 
-        <Button onGuardar={agregarMovie}></Button>
-
+        {/* Detalle de la película seleccionada */}
         <DetalleMovie
-        movies={movieSeleccionada}
-        visible={mostrarDetalle}
-        onClose={() => setMostrarDetalle(false)} 
+          movie={movieSeleccionada}
+          visible={mostrarDetalle}
+          onClose={() => setMostrarDetalle(false)}
+          onEditar={editarMovie}
+          onEditarClick={abrirFormularioEdicion}
         />
 
+        {/* Formulario para agregar o editar */}
+        <FormularioModal
+          visible={mostrarFormulario}
+          onClose={cerrarFormulario}
+          onGuardar={movieSeleccionada ? editarMovie : agregarMovie}
+          movie={movieSeleccionada}
+          peliculas={movies}
+        />
       </div>
 
       {/* Contenedor principal: carruseles + filtros */}
@@ -64,12 +103,12 @@ const Home = () => {
           <MovieList
             text="Películas y Series que te podrían interesar..."
             movies={UnwatchedMovie}
-            onMovieClick={(movie) => console.log(movie)}
+            onMovieClick={(movie) => verDetalleMovie(movie)}
           />
           <MovieList
             text="Películas y Series que has visto..."
             movies={WatchedMovie}
-            onMovieClick={(movie) => console.log(movie)}
+            onMovieClick={(movie) => verDetalleMovie(movie)}
           />
         </div>
 

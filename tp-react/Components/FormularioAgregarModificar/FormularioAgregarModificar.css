@@ -201,3 +201,21 @@ input:checked + .slider:before {
 .eliminar-imagen:hover {
   background: #333;
 }
+
+.modal select {
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: #141414;
+  color: #ffffff;
+  appearance: none;
+}
+
+.modal select {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg fill="white" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+  padding-right: 30px;
+}
