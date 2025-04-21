@@ -34,6 +34,16 @@
 }
 
 /* Botón Cerrar */
+.guardar {
+  background-color: #007bff;
+  color: white;
+}
+
+.guardar:hover {
+  background-color: #005fcc;
+  transform: scale(1.02);
+}
+
 .cancelar {
   background-color: #000000;
   color: #ffffff;

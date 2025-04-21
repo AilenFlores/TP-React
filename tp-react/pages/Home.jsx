@@ -7,7 +7,6 @@ import MovieList from '../Components/MovieList/MovieList';
 import DetalleMovie from '../Components/DetalleMovie/DetalleMovie';
 import FilterGenre from '../Components/FilterGenre/FilterGenre';
 import FormularioModal from '../Components/FormularioAgregarModificar/FormularioAgregarModificar';
-
 import defaultMovies from '../data/DefaultMovies';
 
 // Si no hay películas en el localStorage, cargamos las predeterminadas
@@ -40,6 +39,12 @@ const Home = () => {
     );
     setMovies(updatedMovies);
   };
+
+  const eliminarMovie = (peliculaAEliminar) => {
+    const nuevasMovies = movies.filter((movie) => movie.id !== peliculaAEliminar.id);
+    setMovies(nuevasMovies);
+    setMostrarDetalle(false); // Ocultamos el modal después de eliminar
+  };  
 
   const verDetalleMovie = (movie) => {
     setMovieSeleccionada(movie);
@@ -85,6 +90,7 @@ const Home = () => {
           onClose={() => setMostrarDetalle(false)}
           onEditar={editarMovie}
           onEditarClick={abrirFormularioEdicion}
+          onEliminar={eliminarMovie}
         />
 
         {/* Formulario para agregar o editar */}
