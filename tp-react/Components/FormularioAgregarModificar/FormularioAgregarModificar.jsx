@@ -22,6 +22,12 @@ function FormularioModal({ visible, onClose, onGuardar, movie, peliculas }) {
   const [imagen, setImagen] = useState(null);
   const [imagenEliminada, setImagenEliminada] = useState(false);
 
+  const rawImage = imagen || movie?.imagen || movie?.img;
+  const imagenSrc =
+    typeof rawImage === 'string'
+      ? rawImage
+      : rawImage?.src || rawImage?.default;
+
   useEffect(() => {
     if (movie) {
       setTitulo(movie.titulo);
@@ -78,12 +84,6 @@ function FormularioModal({ visible, onClose, onGuardar, movie, peliculas }) {
       return;
     }
 
-    const rawImage = imagen || movie?.imagen || movie?.img;
-    const imagenSrc =
-      typeof rawImage === 'string'
-        ? rawImage
-        : rawImage?.src || rawImage?.default;
-
     const imagenAGuardar = imagenEliminada
       ? null
       : (imagen || (esImagenValida(imagenSrc) ? imagenSrc : null));
@@ -123,12 +123,7 @@ function FormularioModal({ visible, onClose, onGuardar, movie, peliculas }) {
 
   if (!visible) return null;
 
-  const rawImage = imagen || movie?.imagen || movie?.img;
-  const imagenSrc =
-    typeof rawImage === 'string'
-      ? rawImage
-      : rawImage?.src || rawImage?.default;
-
+  
   return (
     <div className="modal-overlay">
       <div className="modal">
