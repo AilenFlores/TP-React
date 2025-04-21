@@ -1,9 +1,23 @@
-.InputSearch {
+input {
     padding: 6px 10px;
-    border: 1px solid white;
-    border-radius: 6px;
-    background-color: #222;
+    border: 1px solid rgb(31, 8, 8);
+    border-radius: 10px;
+    background-color: #d8cbcb;
     font-size: 14px;
     margin-left: 50px;
+    color: rgb(20, 5, 5);
   }
 
+/* .inputSearchContainer{
+  width: 700px;
+  margin-left: 30px;
+} */
+.inputField {
+  padding: 6px 10px;
+  border: 1px solid rgb(31, 8, 8);
+  border-radius: 10px;
+  background-color: #d8cbcb;
+  font-size: 14px;
+  margin-left: 20px; /* Ajusta el margen si es necesario */
+  color: rgb(20, 5, 5);
+}

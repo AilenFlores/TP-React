@@ -1,0 +1,30 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column; /* Cambiar a columna si deseas que el texto esté debajo de la imagen */
+    align-items: center; /* Centrar las tarjetas */
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #353030;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image {
+    width: 150px;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  
+  .textContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #e6e1e1;
+  }
+  

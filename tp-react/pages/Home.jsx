@@ -7,7 +7,7 @@ import MovieList from '../Components/MovieList/MovieList';
 import DetalleMovie from '../Components/DetalleMovie/DetalleMovie';
 import FilterGenre from '../Components/FilterGenre/FilterGenre';
 import FormularioModal from '../Components/FormularioAgregarModificar/FormularioAgregarModificar';
-
+import SortedResults from '../Components/SortedResults/SortedResults';
 import defaultMovies from '../data/DefaultMovies';
 
 // Si no hay películas en el localStorage, cargamos las predeterminadas
@@ -16,6 +16,9 @@ if (!localStorage.getItem('peliculas')) {
 }
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+
   const [movies, setMovies] = useState(() => {
     const stored = localStorage.getItem('peliculas');
     return stored ? JSON.parse(stored) : [];
@@ -24,7 +27,8 @@ const Home = () => {
   const [movieSeleccionada, setMovieSeleccionada] = useState(null);
   const [mostrarDetalle, setMostrarDetalle] = useState(false);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
-
+  const [sortField, setSortField] = useState(''); // 'year' o 'rating'
+  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' o 'desc'
   const agregarMovie = (nuevaMovie) => {
     const nuevoId = movies.length > 0
       ? Math.max(...movies.map((m) => m.id || 0)) + 1
@@ -67,13 +71,29 @@ const Home = () => {
 
   const WatchedMovie = movies.filter((movie) => movie.visto === true);
   const UnwatchedMovie = movies.filter((movie) => movie.visto === false);
-
+  const sortedMovies = [...movies].sort((a, b) => {
+    if (!sortField) return 0;
+  
+    const fieldA = a[sortField];
+    const fieldB = b[sortField];
+  
+    if (sortOrder === 'asc') {
+      return fieldA - fieldB;
+    } else {
+      return fieldB - fieldA;
+    }
+  });
+  
   return (
     <div className={Style.homeContainer}>
       {/* Header con título y buscador */}
       <div className={Style.header}>
         <Tittle name="Nerdflix" />
-        <InputSearch />
+        {/* <InputSearch
+          movies={movies}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+        /> */}
         <Button onClick={abrirFormularioAgregar} className="modificar">
           Agregar Película/Serie
         </Button>
@@ -86,7 +106,7 @@ const Home = () => {
           onEditar={editarMovie}
           onEditarClick={abrirFormularioEdicion}
         />
-
+        
         {/* Formulario para agregar o editar */}
         <FormularioModal
           visible={mostrarFormulario}
@@ -96,27 +116,66 @@ const Home = () => {
           peliculas={movies}
         />
       </div>
+      <div className={Style.underNavbar}>
+  <InputSearch
+    movies={movies}
+    searchTerm={searchTerm}
+    onSearchChange={setSearchTerm}
+  />
 
-      {/* Contenedor principal: carruseles + filtros */}
-      <div className={Style.contentWrapper}>
-        <div className={Style.mainContent}>
-          <MovieList
-            text="Películas y Series que te podrían interesar..."
-            movies={UnwatchedMovie}
-            onMovieClick={(movie) => verDetalleMovie(movie)}
-          />
-          <MovieList
-            text="Películas y Series que has visto..."
-            movies={WatchedMovie}
-            onMovieClick={(movie) => verDetalleMovie(movie)}
-          />
-        </div>
+  <div className={Style.sortContainer}>
+    <label>Ordenar por:</label>
+    <select
+      value={sortField}
+      onChange={(e) => setSortField(e.target.value)}
+    >
+      <option value="">-- Seleccionar --</option>
+      <option value="year">Año</option>
+      <option value="rating">Rating</option>
+    </select>
 
-        {/* Filtros al costado */}
-        <div className={Style.filterPanel}>
-          <FilterGenre className={Style.filterGnre} movies={movies} count={3} />
-        </div>
+    <label>Orden:</label>
+    <select
+      value={sortOrder}
+      onChange={(e) => setSortOrder(e.target.value)}
+    >
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+  </div>
+</div>
+
+{/* Si hay búsqueda, mostramos solo los resultados */}
+{searchTerm ? (
+  <div className={Style.searchResults}>
+    {/* Se muestra SearchResults desde el input */}
+  </div>
+) : sortField ? (
+  <SortedResults
+    movies={sortedMovies}
+    onMovieClick={(movie) => verDetalleMovie(movie)}
+  />
+) : (
+  <>
+    <div className={Style.contentWrapper}>
+      <div className={Style.mainContent}>
+        <MovieList
+          text="Películas y Series que te podrían interesar..."
+          movies={UnwatchedMovie}
+          onMovieClick={(movie) => verDetalleMovie(movie)}
+        />
+        <MovieList
+          text="Películas y Series que has visto..."
+          movies={WatchedMovie}
+          onMovieClick={(movie) => verDetalleMovie(movie)}
+        />
       </div>
+      <div className={Style.filterPanel}>
+        <FilterGenre className={Style.filterGnre} movies={movies} count={3} />
+      </div>
+    </div>
+  </>
+)}
 
       {/* Footer */}
       <div className={Style.footer}>
