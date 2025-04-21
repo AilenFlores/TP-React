@@ -1,0 +1,15 @@
+.input-field input {
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 13px;
+    background-color: #141414;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .input-field input::placeholder {
+    color: #bbb;
+  }
+  

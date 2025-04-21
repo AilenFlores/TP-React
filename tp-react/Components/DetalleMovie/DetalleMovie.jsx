@@ -1,8 +1,9 @@
 import React from 'react';
 import '../DetalleMovie/DetalleMovie.css';
-import Button from '../Button/Button'; // Importamos el botón reutilizable
+import Button from '../Button/Button.jsx'; // Importamos el botón reutilizable
+import EliminarMovie from '../EliminarMovie/EliminarMovie.jsx';
 
-function DetalleMovie({ movie, visible, onClose, onEditar, onEditarClick }) {
+function DetalleMovie({ movie, visible, onClose, onEditar, onEditarClick, onEliminar }) {
   if (!visible || !movie) return null;
 
   const rawImage = movie.imagen || movie.img;
@@ -30,11 +31,12 @@ function DetalleMovie({ movie, visible, onClose, onEditar, onEditarClick }) {
           />
         )}
 
-        <div className="modal-buttons">
-          <Button onClick={() => onEditarClick(movie)} className="modificar">Modificar</Button>
-          <Button onClick={() => onEditar(movie)} className="eliminar">Eliminar</Button>
-          <Button onClick={onClose} className="cancelar">Cerrar</Button>
-        </div>
+      <div className="modal-buttons">
+        <Button onClick={() => onEditarClick(movie)} className="modificar">Modificar</Button>
+        <EliminarMovie movie={movie} onEliminar={onEliminar} /> {/* este */}
+        <Button onClick={onClose} className="cancelar">Cerrar</Button>
+      </div>
+
       </div>
     </div>
   );
