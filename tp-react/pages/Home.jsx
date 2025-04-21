@@ -126,7 +126,7 @@ const Home = () => {
 
       {/* Footer */}
       <div className={Style.footer}>
-        <span>© 2023 NERDFLIX. Todos los derechos reservados.</span>
+        <span>© 2025 NERDFLIX. Todos los derechos reservados.</span>
       </div>
     </div>
   );
