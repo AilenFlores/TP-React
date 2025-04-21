@@ -15,7 +15,7 @@ const MovieCarousel = ({ movies, onMovieClick }) => {
   return (
     <div className={Style.carouselWrapper}>
       {/* Flecha izquierda visible al costado si hay 5+ pelis */}
-      {movies.length > 5 && (
+      {movies.length > 4 && (
         <button className={`${Style.arrow} ${Style.left}`} onClick={scrollLeft}>
           &#8592;
         </button>
@@ -33,7 +33,7 @@ const MovieCarousel = ({ movies, onMovieClick }) => {
       </div>
 
       {/* Flecha derecha visible al costado si hay 5+ pelis */}
-      {movies.length > 5 && (
+      {movies.length > 4 && (
         <button className={`${Style.arrow} ${Style.right}`} onClick={scrollRight}>
           &#8594;
         </button>
