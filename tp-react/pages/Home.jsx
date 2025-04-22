@@ -100,10 +100,16 @@ const handleGenreChange = (genre) => {
   const matchesGenre = selectedGenres.length === 0 || selectedGenres.includes(movie.genero);
   return matchesType && matchesGenre;
 });
-//console.log("Películas filtradas:", filteredMovies);
+// console.log("Películas filtradas:", filteredMovies);
 
-const WatchedMovie = filteredMovies.filter(movie => movie.visto === true);
-const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
+const SecondFilteredMovies = filteredMovies.filter((movie) => {
+  return movie.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  movie.director.toLowerCase().includes(searchTerm.toLowerCase())
+});
+
+const WatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === true);
+const UnwatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === false);
+// console.log("@@@@@", SecondFilteredMovies);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -126,11 +132,7 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
       {/* Header con título y buscador */}
       <div className={Style.header}>
         <Tittle name="Nerdflix" />
-        {/* <InputSearch
-          movies={movies}
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-        /> */}
+        
         <Button onClick={abrirFormularioAgregar} className="modificar">
           Agregar Película/Serie
         </Button>
@@ -155,8 +157,8 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
         />
       </div>
       <div className={Style.underNavbar}>
+
   <InputSearch
-    movies={movies}
     searchTerm={searchTerm}
     onSearchChange={setSearchTerm}
   />
@@ -184,17 +186,17 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
 </div>
 
 {/* Si hay búsqueda, mostramos solo los resultados */}
-{searchTerm ? (
-  <div className={Style.searchResults}>
+{/* {searchTerm ? (
+  <div className={Style.searchResults}> */}
     {/* Se muestra SearchResults desde el input */}
-  </div>
+  {/* </div>
 ) : sortField ? (
   <SortedResults
     movies={sortedMovies}
     onMovieClick={(movie) => verDetalleMovie(movie)}
   />
 ) : (
-  <>
+  <> */}
     <div className={Style.contentWrapper}>
       <div className={Style.mainContent}>
         <MovieList
@@ -218,8 +220,8 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
       />
       </div>
     </div>
-  </>
-)}
+  {/* </>
+)} */}
       {/* Footer */}
       <div className={Style.footer}>
         <span>© 2025 NERDFLIX. Todos los derechos reservados.</span>
