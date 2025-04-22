@@ -9,38 +9,26 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Botón Agregar (puede usarse también como primario) */
 .addButton,
-.modificar {
-  background-color: #007bff;
+.modificar, .guardar{
+  background-color: #980a0a	;
   color: white;
 }
 
 .addButton:hover,
-.modificar:hover {
-  background-color: #005fcc;
+.modificar:hover,
+.guardar:hover {
+  background-color: #780909;
   transform: scale(1.02);
 }
 
-/* Botón Eliminar */
 .eliminar {
-  background-color: #dc3545;
+  background-color: #43465e;
   color: white;
 }
 
 .eliminar:hover {
-  background-color: #c82333;
-  transform: scale(1.02);
-}
-
-/* Botón Cerrar */
-.guardar {
-  background-color: #007bff;
-  color: white;
-}
-
-.guardar:hover {
-  background-color: #005fcc;
+  background-color: #131834;
   transform: scale(1.02);
 }
 
@@ -50,6 +38,6 @@
 }
 
 .cancelar:hover {
-  background-color: #454444;
+  background-color: #564d4d;
   transform: scale(1.02);
 }
