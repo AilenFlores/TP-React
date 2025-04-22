@@ -18,7 +18,6 @@ if (!localStorage.getItem('peliculas')) {
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-
   const [movies, setMovies] = useState(() => {
     const stored = localStorage.getItem('peliculas');
     return stored ? JSON.parse(stored) : [];
@@ -75,8 +74,40 @@ const Home = () => {
     localStorage.setItem('peliculas', JSON.stringify(movies));
   }, [movies]);
 
-  const WatchedMovie = movies.filter((movie) => movie.visto === true);
-  const UnwatchedMovie = movies.filter((movie) => movie.visto === false);
+  //////////////////////////////////Logica de los filtros//////////////////////////////////////////////
+  const [selectedGenres, setSelectedGenres] = useState([]); // 
+  const [selectedType, setSelectedType] = useState('Pelicula'); // 
+  
+  const handleTypeChange = (event) => { // Cambio de tipo 
+    setSelectedType(event.target.value); // Actualiza el tipo seleccionado
+  // console.log("Tipo seleccionado:", event.target.value);
+  };
+
+// Cambio de géneros
+const handleGenreChange = (genre) => {
+  setSelectedGenres((prev) => {
+    if (prev.includes(genre)) {
+      return prev.filter((g) => g !== genre); // Si ya está seleccionado, lo saca
+    } else {
+      return [...prev, genre]; // Si no está seleccionado, lo agrego
+    }
+  });
+};
+
+ // Aplicar filtro dinámico sin modificar movies directamente
+ const filteredMovies = movies.filter(movie => {
+  const matchesType = movie.tipo === selectedType;
+  const matchesGenre = selectedGenres.length === 0 || selectedGenres.includes(movie.genero);
+  return matchesType && matchesGenre;
+});
+//console.log("Películas filtradas:", filteredMovies);
+
+const WatchedMovie = filteredMovies.filter(movie => movie.visto === true);
+const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+
   const sortedMovies = [...movies].sort((a, b) => {
     if (!sortField) return 0;
   
@@ -178,12 +209,17 @@ const Home = () => {
         />
       </div>
       <div className={Style.filterPanel}>
-        <FilterGenre className={Style.filterGnre} movies={movies} count={3} />
+      <FilterGenre
+      movies={movies}
+      selectedGenres={selectedGenres}
+      onGenreChange={handleGenreChange}
+      selectedType={selectedType}
+      onTypeChange={handleTypeChange}
+      />
       </div>
     </div>
   </>
 )}
-
       {/* Footer */}
       <div className={Style.footer}>
         <span>© 2025 NERDFLIX. Todos los derechos reservados.</span>
