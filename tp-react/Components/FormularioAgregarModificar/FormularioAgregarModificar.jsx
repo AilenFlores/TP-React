@@ -169,7 +169,7 @@ function FormularioModal({ visible, onClose, onGuardar, movie, peliculas }) {
           label="Tipo"
           value={tipo}
           onChange={setTipo}
-          options={['Película', 'Serie']}
+          options={['Pelicula', 'Serie']}
         />
 
         <SwitchVisto visto={visto} onChange={() => setVisto(!visto)} />
