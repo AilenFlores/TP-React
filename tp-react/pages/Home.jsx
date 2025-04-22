@@ -5,7 +5,7 @@ import Button from '../Components/Button/Button'; // Importamos el componente Bu
 import Tittle from '../Components/Tittle/Tittle';
 import MovieList from '../Components/MovieList/MovieList';
 import DetalleMovie from '../Components/DetalleMovie/DetalleMovie';
-import FilterGenre from '../Components/FilterGenre/FilterGenre';
+import Filter from '../Components/Filter/Filter';
 import FormularioModal from '../Components/FormularioAgregarModificar/FormularioAgregarModificar';
 
 import defaultMovies from '../data/DefaultMovies';
@@ -75,12 +75,18 @@ const Home = () => {
   }, [movies]);
 
   //////////////////////////////////Logica de los filtros//////////////////////////////////////////////
-  const [selectedGenres, setSelectedGenres] = useState([]); // 
-  const [selectedType, setSelectedType] = useState('Pelicula'); // 
-  
-  const handleTypeChange = (event) => { // Cambio de tipo 
-    setSelectedType(event.target.value); // Actualiza el tipo seleccionado
-  // console.log("Tipo seleccionado:", event.target.value);
+  const [selectedGenres, setSelectedGenres] = useState([]); //   
+  const [selectedType, setSelectedType] = useState([]);
+
+  // Cambios de tipos
+  const handleTypeChange = (tipo) => {
+    setSelectedType((prev) => {
+      if (prev.includes(tipo)) {
+        return prev.filter((t) => t !== tipo);
+      } else {
+        return [...prev, tipo];
+      }
+    });
   };
 
 // Cambio de géneros
@@ -96,10 +102,11 @@ const handleGenreChange = (genre) => {
 
  // Aplicar filtro dinámico sin modificar movies directamente
  const filteredMovies = movies.filter(movie => {
-  const matchesType = movie.tipo === selectedType;
+  const matchesType = selectedType.length === 0 || selectedType.includes(movie.tipo);
   const matchesGenre = selectedGenres.length === 0 || selectedGenres.includes(movie.genero);
   return matchesType && matchesGenre;
 });
+
 //console.log("Películas filtradas:", filteredMovies);
 
 const WatchedMovie = filteredMovies.filter(movie => movie.visto === true);
@@ -209,7 +216,7 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
         />
       </div>
       <div className={Style.filterPanel}>
-      <FilterGenre
+      <Filter
       movies={movies}
       selectedGenres={selectedGenres}
       onGenreChange={handleGenreChange}
