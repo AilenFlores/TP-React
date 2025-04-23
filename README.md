@@ -6,10 +6,10 @@
  |------------------------|------------|
  | Jazmín Loureiro        | FAI-4228   |
  | Nicolás Bucaray        | FAI-4255   |
- | Ailén Flores Montes    | FAI-3547   |
+ | Ailen Flores Montes    | FAI-3547   |
  
  -----------------------------------------------------------
- Visualizacion en Vercel https://tp-react-ochre.vercel.app/ 
+El proyecto está desplegado en Vercel: https://tp-react-ochre.vercel.app/
  -----------------------------------------------------------
 
  
