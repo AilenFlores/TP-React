@@ -24,7 +24,7 @@
     color: white;
   }
 
-  .noMoviesMessage { /* Mensaje de "No hay películas" */
+  .noMoviesMessage { 
     background-color: gray;
     color: black;
     position: relative;
@@ -42,4 +42,22 @@
     font-size: 1.2rem;
     color: #555; 
   }
+  
+  @media (max-width: 768px) {
+    .sectionHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      word-break: break-word; 
+    }
+  
+    .leftTitle,
+    .rightTitle {
+      font-size: 15px;
+      line-height: 1.4;
+      width: 100%; 
+    }
+  }
+  
   

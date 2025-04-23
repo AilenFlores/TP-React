@@ -6,10 +6,10 @@ const MovieCarousel = ({ movies, onMovieClick }) => {
 
   const scrollRef = useRef(null);
   const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -280, behavior: 'smooth' }); 
+    scrollRef.current.scrollBy({ left: -240, behavior: 'smooth' }); 
   };
   const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 280, behavior: 'smooth' });
+    scrollRef.current.scrollBy({ left: 240, behavior: 'smooth' });
   };
 
   return (

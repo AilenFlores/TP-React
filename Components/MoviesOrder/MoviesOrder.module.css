@@ -1,24 +1,61 @@
+.sortContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 10px;
+  color: white;
+  background-color: #121212;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
 
-  .searchResults {
-    flex: 1;  
-    padding: 20px;
-  }
+.sortContainer label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.sortContainer select {
+  padding: 6px 10px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #666;
+  border-radius: 5px;
+  min-width: 120px;
+}
+
+
+
+@media (max-width: 500px) {
   .sortContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
     align-items: center;
-    gap: 10px;
-    padding: 10px;
-    color: white;
-    background-color: #121212;
-    margin-top: 5px;
-    border-radius: 8px;
-    border: 1px solid #444;
+    font-size: 12px;
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 5px; 
+    gap: 5px;
   }
-  
+
   .sortContainer select {
-    padding: 5px;
-    margin: 0 10px;
-    background-color: #333;
-    color: white;
-    border: 1px solid #666;
-    border-radius: 5px;
+    flex: 1;
+    min-width: 80px; 
+    max-width: 110px; 
+    font-size: 12px;
+    padding: 4px; 
+    box-sizing: border-box;
   }
+
+  .sortContainer label {
+    white-space: nowrap; 
+    text-align: center; 
+    font-size: 12px;
+    max-width: 80px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+

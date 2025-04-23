@@ -44,3 +44,9 @@
     right: 0;
   }
   
+  @media (max-width: 375px) {
+    .arrow {
+      display: none;
+    }
+  }
+  

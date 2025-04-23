@@ -171,7 +171,7 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
 
       <div className={Style.underNavbar}>
         <InputSearch searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
-<div>
+        <div className={Style.orderWrapper}>
         <MoviesOrder
         sortField={sortField}
         setSortField={setSortField}
@@ -195,14 +195,15 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
         />
       </div>
      
-      <Filter
-      movies={movies}
-      selectedGenres={selectedGenres}
-      onGenreChange={handleGenreChange}
-      selectedType={selectedType}
-      onTypeChange={handleTypeChange}
-      />
-
+      <div className={Style.filterWrapper}>
+        <Filter
+        movies={movies}
+        selectedGenres={selectedGenres}
+        onGenreChange={handleGenreChange}
+        selectedType={selectedType}
+        onTypeChange={handleTypeChange}
+        />
+      </div>
     </div>
 
       <div className={Style.footer}>

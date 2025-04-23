@@ -10,11 +10,10 @@ const MovieList = ({ text, movies, onMovieClick }) => {
         <div className={Style.sectionHeader}>
           <span className={Style.leftTitle}>{text}</span>
           <span className={Style.rightTitle}>
-            <Counter count={movies.length} label="Esta lista contiene"/>
+            <Counter count={movies.length} label="Cantidad"/>
           </span>
         </div>
         
-        {/* Condicional: Si hay películas, mostrar el carrusel, si no, mostrar el mensaje */}
         {movies.length > 0 ? (
           <MovieCarousel movies={movies} onMovieClick={onMovieClick} />
         ) : (
