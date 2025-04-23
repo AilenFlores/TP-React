@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Style from './Home.module.css';
 import InputSearch from '../Components/InputSearch/InputSearch';
-import Button from '../Components/Button/Button'; // Importamos el componente Button
+import Button from '../Components/Button/Button'; 
 import Tittle from '../Components/Tittle/Tittle';
 import MovieList from '../Components/MovieList/MovieList';
 import DetalleMovie from '../Components/DetalleMovie/DetalleMovie';
 import Filter from '../Components/Filter/Filter';
 import FormularioModal from '../Components/FormularioAgregarModificar/FormularioAgregarModificar';
-
+import MoviesOrder from '../Components/MoviesOrder/MoviesOrder';
 import defaultMovies from '../data/DefaultMovies';
 
 // Si no hay películas en el localStorage, cargamos las predeterminadas
@@ -17,17 +17,21 @@ if (!localStorage.getItem('peliculas')) {
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [movieSeleccionada, setMovieSeleccionada] = useState(null);
+  const [mostrarDetalle, setMostrarDetalle] = useState(false);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  
+  const [selectedGenres, setSelectedGenres] = useState([]); //   
+  const [selectedType, setSelectedType] = useState([]);
+
+  const [sortField, setSortField] = useState(''); // 'year' o 'rating'
+  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' o 'desc'
 
   const [movies, setMovies] = useState(() => {
     const stored = localStorage.getItem('peliculas');
     return stored ? JSON.parse(stored) : [];
   });
 
-  const [movieSeleccionada, setMovieSeleccionada] = useState(null);
-  const [mostrarDetalle, setMostrarDetalle] = useState(false);
-  const [mostrarFormulario, setMostrarFormulario] = useState(false);
-  const [sortField, setSortField] = useState(''); // 'year' o 'rating'
-  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' o 'desc'
   const agregarMovie = (nuevaMovie) => {
     const nuevoId = movies.length > 0
       ? Math.max(...movies.map((m) => m.id || 0)) + 1
@@ -47,7 +51,7 @@ const Home = () => {
   const eliminarMovie = (peliculaAEliminar) => {
     const nuevasMovies = movies.filter((movie) => movie.id !== peliculaAEliminar.id);
     setMovies(nuevasMovies);
-    setMostrarDetalle(false); // Ocultamos el modal después de eliminar
+    setMostrarDetalle(false); 
   };  
 
   const verDetalleMovie = (movie) => {
@@ -56,7 +60,7 @@ const Home = () => {
   };
 
   const abrirFormularioAgregar = () => {
-    setMovieSeleccionada(null); // modo agregar
+    setMovieSeleccionada(null); 
     setMostrarFormulario(true);
   };
 
@@ -74,11 +78,7 @@ const Home = () => {
     localStorage.setItem('peliculas', JSON.stringify(movies));
   }, [movies]);
 
-  //////////////////////////////////Logica de los filtros//////////////////////////////////////////////
-  const [selectedGenres, setSelectedGenres] = useState([]); //   
-  const [selectedType, setSelectedType] = useState([]);
 
-  // Cambios de tipos
   const handleTypeChange = (tipo) => {
     setSelectedType((prev) => {
       if (prev.includes(tipo)) {
@@ -89,59 +89,68 @@ const Home = () => {
     });
   };
 
-// Cambio de géneros
 const handleGenreChange = (genre) => {
   setSelectedGenres((prev) => {
     if (prev.includes(genre)) {
-      return prev.filter((g) => g !== genre); // Si ya está seleccionado, lo saca
+      return prev.filter((g) => g !== genre);
     } else {
-      return [...prev, genre]; // Si no está seleccionado, lo agrego
+      return [...prev, genre]; 
     }
   });
 };
 
- // Aplicar filtro dinámico sin modificar movies directamente
- const filteredMovies = movies.filter(movie => {
-  const matchesType = selectedType.length === 0 || selectedType.includes(movie.tipo);
-  const matchesGenre = selectedGenres.length === 0 || selectedGenres.includes(movie.genero);
-  return matchesType && matchesGenre;
-});
-//console.log("Películas filtradas:", filteredMovies);
-const SecondFilteredMovies = filteredMovies.filter((movie) => {
-  return movie.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  movie.director.toLowerCase().includes(searchTerm.toLowerCase())
-});
-const WatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === true);
-const UnwatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === false);
-// console.log("@@@@@", SecondFilteredMovies);
-
-//////////////////////////////////////////////////////////////////////////////////////
 
 
-  const sortedMovies = [...movies].sort((a, b) => {
-    if (!sortField) return 0;
-  
-    const fieldA = a[sortField];
-    const fieldB = b[sortField];
-  
-    if (sortOrder === 'asc') {
-      return fieldA - fieldB;
-    } else {
-      return fieldB - fieldA;
-    }
+const [filteredMovies, setFilteredMovies] = useState([]);
+useEffect(() => {
+  // 1: Filtrar por género y tipo
+  let filtradas = movies.filter(movie => {
+    const matchesType = selectedType.length === 0 || selectedType.includes(movie.tipo);
+    const matchesGenre = selectedGenres.length === 0 || selectedGenres.includes(movie.genero);
+    return matchesType && matchesGenre;
   });
+
+  // 2: Filtrar por búsqueda
+  if (searchTerm.trim() !== '') {
+    filtradas = filtradas.filter(movie =>
+      movie.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      movie.director.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  // Ordenar
+  if (sortField) {
+    filtradas.sort((a, b) => {
+      const fieldA = a[sortField];
+      const fieldB = b[sortField];
   
+      if (typeof fieldA === 'string' && typeof fieldB === 'string') {
+        return sortOrder === 'asc'
+          ? fieldA.localeCompare(fieldB)
+          : fieldB.localeCompare(fieldA);
+      }
+  
+      return sortOrder === 'asc'
+        ? fieldA - fieldB
+        : fieldB - fieldA;
+    });
+  }
+  
+  setFilteredMovies(filtradas);
+}, [movies, selectedGenres, selectedType, searchTerm, sortField, sortOrder]);
+
+const WatchedMovie = filteredMovies.filter(movie => movie.visto === true);
+const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
+
   return (
     <div className={Style.homeContainer}>
-      {/* Header con título y buscador */}
       <div className={Style.header}>
         <Tittle name="Nerdflix" />
-        
+  
         <Button onClick={abrirFormularioAgregar} className="modificar">
           Agregar Película/Serie
         </Button>
 
-        {/* Detalle de la película seleccionada */}
         <DetalleMovie
           movie={movieSeleccionada}
           visible={mostrarDetalle}
@@ -151,7 +160,6 @@ const UnwatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === fals
           onEliminar={eliminarMovie}
         />
         
-        {/* Formulario para agregar o editar */}
         <FormularioModal
           visible={mostrarFormulario}
           onClose={cerrarFormulario}
@@ -160,47 +168,18 @@ const UnwatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === fals
           peliculas={movies}
         />
       </div>
+
       <div className={Style.underNavbar}>
+        <InputSearch searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
 
-  <InputSearch
-    searchTerm={searchTerm}
-    onSearchChange={setSearchTerm}
-  />
+        <MoviesOrder
+        sortField={sortField}
+        setSortField={setSortField}
+        sortOrder={sortOrder}
+        setSortOrder={setSortOrder} />
+      
+      </div>
 
-  <div className={Style.sortContainer}>
-    <label>Ordenar por:</label>
-    <select
-      value={sortField}
-      onChange={(e) => setSortField(e.target.value)}
-    >
-      <option value="">-- Seleccionar --</option>
-      <option value="year">Año</option>
-      <option value="rating">Rating</option>
-    </select>
-
-    <label>Orden:</label>
-    <select
-      value={sortOrder}
-      onChange={(e) => setSortOrder(e.target.value)}
-    >
-      <option value="asc">Ascendente</option>
-      <option value="desc">Descendente</option>
-    </select>
-  </div>
-</div>
-
-{/* Si hay búsqueda, mostramos solo los resultados */}
-{/* {searchTerm ? (
-  <div className={Style.searchResults}> */}
-    {/* Se muestra SearchResults desde el input */}
-  {/* </div>
-) : sortField ? (
-  <SortedResults
-    movies={sortedMovies}
-    onMovieClick={(movie) => verDetalleMovie(movie)}
-  />
-) : (
-  <> */}
     <div className={Style.contentWrapper}>
       <div className={Style.mainContent}>
         <MovieList
@@ -214,7 +193,7 @@ const UnwatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === fals
           onMovieClick={(movie) => verDetalleMovie(movie)}
         />
       </div>
-      <div className={Style.filterPanel}>
+     
       <Filter
       movies={movies}
       selectedGenres={selectedGenres}
@@ -222,11 +201,9 @@ const UnwatchedMovie = SecondFilteredMovies.filter(movie => movie.visto === fals
       selectedType={selectedType}
       onTypeChange={handleTypeChange}
       />
-      </div>
+
     </div>
-  {/* </>
-)} */}
-      {/* Footer */}
+
       <div className={Style.footer}>
         <span>© 2025 NERDFLIX. Todos los derechos reservados.</span>
       </div>

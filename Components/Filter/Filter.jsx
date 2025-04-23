@@ -11,7 +11,7 @@ const Filter = ({ movies, selectedGenres, onGenreChange, selectedType, onTypeCha
       <h5>Géneros:</h5>
       {unicos.map((genre, index) => {
         const count = movies.filter(movie => movie.genero === genre).length;
-        const checked = selectedGenres.includes(genre); //include verifica si el género está seleccionado
+        const checked = selectedGenres.includes(genre);
         return (
           <label key={index}>
             <input
@@ -24,9 +24,7 @@ const Filter = ({ movies, selectedGenres, onGenreChange, selectedType, onTypeCha
         );
       })}
 
-      {/* ckeckbox para Tipo*/}
       <h5>Tipo:</h5>
-      {/* Contadores por tipo */}
       {(() => {
         const peliculaCount = movies.filter(movie => movie.tipo === 'Pelicula').length;
         const serieCount = movies.filter(movie => movie.tipo === 'Serie').length;
@@ -38,7 +36,7 @@ const Filter = ({ movies, selectedGenres, onGenreChange, selectedType, onTypeCha
           checked={selectedType.includes('Pelicula')}
           onChange={() => onTypeChange('Pelicula')}
         />
-        Películas <Counter count={peliculaCount} />
+        Peliculas <Counter count={peliculaCount} />
       </label>
 
       <label>

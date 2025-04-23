@@ -1,10 +1,6 @@
 import React from 'react';
 import Style from './InputSearch.module.css';
-// import MovieCardSimple from '../MovieCardSimple/MovieCardSimple';
-
 const InputSearch = ({ searchTerm, onSearchChange }) => {
-  
-
   return (
     <div className={Style.inputSearchContainer}>
       <input
