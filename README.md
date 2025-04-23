@@ -10,9 +10,8 @@
  
  ------------------------------------------------
  
- ## Descripcion de la aplicacion.
- 
- **Nerdflix** es una aplicación web que simula una plataforma de gestión de películas y series. Permite al usuario ver dos listados de películas/series (vistas y no vistas). Ademas se puede acceder a detalles, editar información, agregar nuevas películas/series y eliminar las mismas. Está desarrollada con **React** y tiene como objetivo aplicar conceptos de desarrollo frontend y manejo de estados en una SPA.
+ ## Descripcion de la aplicación.
+
  Nerdflix es una aplicación web que simula una plataforma para la gestión de películas y series. Permite al usuario visualizar dos listados diferenciados: contenidos vistos y no vistos. Además, ofrece funcionalidades como:
  
  -Acceder a los detalles de cada película o serie.
@@ -42,7 +41,7 @@
  
  ---
  
- ## Instrucciones de instalacion
+ ## Instrucciones de instalación
  
  **1. Clonar el repositorio**
  Abrí una terminal y ejecutá:
@@ -53,8 +52,6 @@
  Luego ejecutá:
  
  cd TP-React
- 
- cd tp-react
  
  **3. Instalar Node.js (si no lo tenés)**
  Asegurate de tener instalado Node.js (recomendado: versión 16 o superior).
