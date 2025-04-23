@@ -1,11 +1,11 @@
 .tittle {
-  font-family: 'Helvetica', 'Arial', sans-serif; /* Fuente sans-serif similar a la de Netflix */
-  font-weight: bold; /* Texto en negrita */
-  color: #E50914; /* Rojo característico de Netflix */
-  text-transform: uppercase; /* Letras en mayúsculas */
-  flex: 0; /* Cambié de 1 a 0 para que no ocupe el espacio restante */
-  min-width: 0; /* Evita desbordes si el título es muy largo */
+  font-family: 'Helvetica', 'Arial', sans-serif; 
+  font-weight: bold; 
+  color: #E50914; 
+  text-transform: uppercase; 
+  flex: 0; 
+  min-width: 0; 
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: left; /* Alinea el texto a la izquierda */
+  text-align: left;
 }

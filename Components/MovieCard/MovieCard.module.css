@@ -1,6 +1,4 @@
-/* MovieItem.module.css */
 
-/* Estilo de las tarjetas */
 .card {
     position: relative;
     width: 220px;
@@ -9,12 +7,12 @@
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Efecto de escala suave */
+    transition: transform 0.3s ease; 
     flex-shrink: 0;
   }
   
   .card:hover {
-    transform: scale(1.03); /* Suave efecto de zoom al pasar el mouse */
+    transform: scale(1.03); 
   }
   
   .moviePoster {
@@ -23,7 +21,6 @@
     object-fit: cover;
   }
   
-  /* Overlay al pasar el mouse */
   .movieOverlay {
     position: absolute;
     bottom: 0;
@@ -34,10 +31,10 @@
     padding: 10px;
     text-align: center;
     opacity: 0;
-    transition: opacity 0.3s ease; /* Efecto de desvanecimiento */
+    transition: opacity 0.3s ease; 
   }
   
-  .card:hover .movieOverlay { /* Mostrar overlay al pasar el mouse */
+  .card:hover .movieOverlay { 
     opacity: 1;
   }
   

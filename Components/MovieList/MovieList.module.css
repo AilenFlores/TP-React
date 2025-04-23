@@ -1,6 +1,4 @@
-/* MovieList.module.css */
 
-/* Fondo gris para la sección */
 .section {
     background-color: #131313 ;
     padding: 20px;
@@ -10,7 +8,6 @@
     position: relative; 
   }
   
-  /* Títulos de la sección */
   .sectionHeader {
     display: flex;
     justify-content: space-between;
