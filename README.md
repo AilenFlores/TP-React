@@ -8,11 +8,14 @@
  | Nicolás Bucaray        | FAI-4255   |
  | Ailén Flores Montes    | FAI-3547   |
  
- ------------------------------------------------
+ -----------------------------------------------------------
+ Visualizacion en Vercel https://tp-react-ochre.vercel.app/ 
+ -----------------------------------------------------------
+
  
  ## Descripcion de la aplicación.
 
- Nerdflix es una aplicación web que simula una plataforma para la gestión de películas y series. Permite al usuario visualizar dos listados diferenciados: contenidos vistos y no vistos. Además, ofrece funcionalidades como:
+ Nerdflix es una aplicación web con diseño responsive que simula una plataforma para la gestión de películas y series. Permite al usuario visualizar dos listados diferenciados: contenidos vistos y no vistos. Además, ofrece funcionalidades como:
  
  -Acceder a los detalles de cada película o serie.
  
