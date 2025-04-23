@@ -1,5 +1,5 @@
 import React from 'react';
-import './imagenUploader.css';
+import './ImagenUploader.css';
 
 function ImagenUploader({ imagenSrc, onImagenChange, onEliminar, imagenEliminada }) {
   const esImagenValida = (src) =>
