@@ -171,12 +171,13 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
 
       <div className={Style.underNavbar}>
         <InputSearch searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
-
+<div>
         <MoviesOrder
         sortField={sortField}
         setSortField={setSortField}
         sortOrder={sortOrder}
         setSortOrder={setSortOrder} />
+        </div>
       
       </div>
 
