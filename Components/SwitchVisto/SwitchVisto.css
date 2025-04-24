@@ -52,11 +52,11 @@
   }
   
   input:checked + .slider {
-    background-color: #007bff;
+    background-color: #980a0a;
   }
   
   input:checked + .slider:hover {
-    background-color: #0253af;
+    background-color: #780909;
   }
   
   input:checked + .slider:before {
