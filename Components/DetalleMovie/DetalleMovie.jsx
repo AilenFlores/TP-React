@@ -6,6 +6,8 @@ import EliminarMovie from '../EliminarMovie/EliminarMovie.jsx';
 function DetalleMovie({ movie, visible, onClose, onEditar, onEditarClick, onEliminar }) {
   if (!visible || !movie) return null;
 
+  //const imagenSrc = movie.imagen || movie.img || fallbackImage; --> asi de simple
+
   const rawImage = movie.imagen || movie.img;
   const imagenSrc =
     typeof rawImage === 'string'
@@ -16,6 +18,7 @@ function DetalleMovie({ movie, visible, onClose, onEditar, onEditarClick, onElim
     <div
   className="modal-overlay"
   onClick={(e) => {
+    //Creo que en vez de esto de clases pueden usar las props visible y movie
     if (e.target.classList.contains('modal-overlay')) {
       onClose();
     }

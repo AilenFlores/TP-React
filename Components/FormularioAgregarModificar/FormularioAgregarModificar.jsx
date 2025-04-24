@@ -127,6 +127,11 @@ function FormularioModal({ visible, onClose, onGuardar, movie, peliculas }) {
   return (
     <div className="modal-overlay">
       <div className="modal">
+
+        {/* <h3>{movie ? "Editar Pelicula / Serie" : "Agregar Pelocula / Serie"}</h3>
+
+        asi tienen titulo distinto si esta editando o agregando
+ */}
         <h3>Agregar Película / Serie</h3>
 
         <InputField 

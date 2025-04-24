@@ -4,6 +4,7 @@ import Style from './Counter.module.css';
 const Counter = ({ count, movies = [], genre, label }) => {
   let finalCount = 0;
 
+  //Count puede no ser un numero? 
   if (typeof count === 'number') { // Si count es un número, lo usamos directamente
     finalCount = count;
   } else if (genre) { // Si se da un género, contamos las películas de ese género

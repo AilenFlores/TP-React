@@ -13,7 +13,7 @@ const MovieList = ({ text, movies, onMovieClick }) => {
             <Counter count={movies.length} label="Cantidad"/>
           </span>
         </div>
-        
+        {/* Tal vez podria ser un <ul> dado que es una lista de elementos */}
         {movies.length > 0 ? (
           <MovieCarousel movies={movies} onMovieClick={onMovieClick} />
         ) : (

@@ -14,6 +14,7 @@ const MovieItem = ({ movie, onMovieClick }) => {
     <div className={Style.card} onClick={() => onMovieClick(movie)}>
       {imageSrc && <img src={imageSrc} alt={movie.titulo} className={Style.moviePoster} />}
       <div className={Style.movieOverlay}>
+        {/* Esto deberia ser un componente. Es el mismo style y solo cambia el texto */}
         <h2 className={Style.movieTitle}>{movie.titulo}</h2>
         <h3 className={Style.movieTitle}>Categoría: {movie.tipo}</h3>
         <h3 className={Style.movieTitle}>Director: {movie.director}</h3>
