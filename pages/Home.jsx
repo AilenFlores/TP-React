@@ -147,6 +147,7 @@ const UnwatchedMovie = filteredMovies.filter(movie => movie.visto === false);
       <div className={Style.header}>
         <Tittle name="Nerdflix" />
   
+  {/* este modificar funciona sin Style.modificar? */}
         <Button onClick={abrirFormularioAgregar} className="modificar">
           Agregar Película/Serie
         </Button>

@@ -1,3 +1,18 @@
+Correcciones:
+- Buen uso de /data para tener todo mas centralizado.
+- proyecto con estructura de componentes clara y bien modularizado
+- excelente integración de componentes como MovieList, DetalleMovie, FormularioModal, Filter, etc
+- separan lógica y presentación correctamente (cada componente cumple un rol)
+- uso de localStorage para persistencia bien implementado
+- Muy linda UI, con animaciones, detalles muy precisos en distancias y tamanos. Muy profesional.
+
+
+Cosas a mejorar:
+- Mantengan un solo idioma, en lo posible ingles. Hay files que mezclan ingles/espanol.
+- La estructura de carpetas no es correcta, components, data y pages deberian ir dentro de src
+
+Nota: 10.
+
 # Proyecto React - Gestor Peliculas y Series "Nerdflix".
 
  ## 👨‍💻👩‍💻 Integrantes del Grupo
@@ -32,7 +47,7 @@ El proyecto está desplegado en Vercel: https://tp-react-ochre.vercel.app/
  
  **index.css**: Archivo que contiene los estilos globales de la aplicación. Aquí se definen reglas CSS que afectan a todos los componentes, como fuentes, márgenes, resets, o colores base. Se importa en index.js.
  
- **package-json.js**: Archivo de configuración que describe el proyecto. Define:
+ **package-json.js**: Archivo de configuración que describe el proyecto. Define: //OJO es package.json sin -
  
  -Nombre, versión y descripción del proyecto.
  

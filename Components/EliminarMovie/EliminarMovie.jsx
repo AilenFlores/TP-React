@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 const EliminarMovie = ({ movie, onEliminar }) => {
   const handleEliminar = () => {
+    // Librerias externas? TRAMPA! jaja. Chiste, esta muy lindo.
     Swal.fire({
       title: `¿Estás seguro de que querés eliminar "${movie.titulo}"?`,
       text: 'Esta acción no se puede deshacer.',

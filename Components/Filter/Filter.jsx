@@ -28,6 +28,20 @@ const Filter = ({ movies, selectedGenres, onGenreChange, selectedType, onTypeCha
 
       <h5>Tipo:</h5>
       <div className={Style.tipos}>
+        {/* Esto funciona pero es mala practica. En JSX renderizamos funciones con el etiquetado
+        Si necesitan hacer esto mejor:
+
+        Tener por fuera del JSX:
+        const ListadoTipos = () => (
+                  <>
+                    ...
+                  </>
+                )
+                ...
+
+                Y luego aca:
+<div>{<ListadoTipos/>)}</div>
+        */}
         {(() => {
           const peliculaCount = movies.filter(movie => movie.tipo === 'Pelicula').length;
           const serieCount = movies.filter(movie => movie.tipo === 'Serie').length;

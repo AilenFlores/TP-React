@@ -31,6 +31,7 @@ const MovieCarousel = ({ movies, onMovieClick }) => {
       </div>
 
       {movies.length > 4 && (
+        // Esto tambien podria ser un componente con el onClick y la orientacion como props.
         <button className={`${Style.arrow} ${Style.right}`} onClick={scrollRight}>
           &#8594;
         </button>
